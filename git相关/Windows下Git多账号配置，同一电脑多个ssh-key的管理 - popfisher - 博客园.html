@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<!-- saved from url=(0048)https://www.cnblogs.com/popfisher/p/5731232.html -->
+<html lang="zh-cn"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Windows下Git多账号配置，同一电脑多个ssh-key的管理 - popfisher - 博客园</title>
+<link type="text/css" rel="stylesheet" href="./Windows下Git多账号配置，同一电脑多个ssh-key的管理 - popfisher - 博客园_files/blog-common.css">
+<link id="MainCss" type="text/css" rel="stylesheet" href="./Windows下Git多账号配置，同一电脑多个ssh-key的管理 - popfisher - 博客园_files/bundle-CodingLife.css">
+<link id="mobile-style" media="only screen and (max-width: 767px)" type="text/css" rel="stylesheet" href="./Windows下Git多账号配置，同一电脑多个ssh-key的管理 - popfisher - 博客园_files/bundle-CodingLife-mobile.css">
+<link title="RSS" type="application/rss+xml" rel="alternate" href="http://www.cnblogs.com/popfisher/rss">
+<link title="RSD" type="application/rsd+xml" rel="EditURI" href="http://www.cnblogs.com/popfisher/rsd.xml">
+<link type="application/wlwmanifest+xml" rel="wlwmanifest" href="http://www.cnblogs.com/popfisher/wlwmanifest.xml">
+<script async="" src="./Windows下Git多账号配置，同一电脑多个ssh-key的管理 - popfisher - 博客园_files/analytics.js.下载"></script><script type="text/javascript" src="./Windows下Git多账号配置，同一电脑多个ssh-key的管理 - popfisher - 博客园_files/encoder.js.下载"></script><script src="./Windows下Git多账号配置，同一电脑多个ssh-key的管理 - popfisher - 博客园_files/jquery-2.2.0.min.js.下载"></script>
+<script type="text/javascript">var currentBlogApp = 'popfisher', cb_enable_mathjax=false;var isLogined=true;</script>
+<script src="./Windows下Git多账号配置，同一电脑多个ssh-key的管理 - popfisher - 博客园_files/blog-common.js.下载" type="text/javascript"></script>
+</head>
+<body>
+<a name="top"></a>
+
+<!--done-->
+<div id="home">
+<div id="header">
+	<div id="blogTitle">
+	<a id="lnkBlogLogo" href="http://www.cnblogs.com/popfisher/"><img id="blogLogo" src="./Windows下Git多账号配置，同一电脑多个ssh-key的管理 - popfisher - 博客园_files/logo.gif" alt="返回主页"></a>			
+		
+<!--done-->
+<h1><a id="Header1_HeaderTitle" class="headermaintitle" href="http://www.cnblogs.com/popfisher/">popfisher</a></h1>
+<h2>hello world！技术重在点滴积累！</h2>
+
+
+
+		
+	</div><!--end: blogTitle 博客的标题和副标题 -->
+	<div id="navigator">
+		
+<ul id="navList">
+<li><a id="blog_nav_sitehome" class="menu" href="http://www.cnblogs.com/">博客园</a></li>
+<li><a id="blog_nav_myhome" class="menu" href="http://www.cnblogs.com/popfisher/">首页</a></li>
+<li><a id="blog_nav_newpost" class="menu" rel="nofollow" href="https://i.cnblogs.com/EditPosts.aspx?opt=1">新随笔</a></li>
+<li><a id="blog_nav_contact" class="menu" rel="nofollow" href="https://msg.cnblogs.com/send/popfisher">联系</a></li>
+<li><a id="blog_nav_rss" class="menu" href="http://www.cnblogs.com/popfisher/rss">订阅</a>
+<!--<a id="blog_nav_rss_image" class="aHeaderXML" href="http://www.cnblogs.com/popfisher/rss"><img src="//www.cnblogs.com/images/xml.gif" alt="订阅" /></a>--></li>
+<li><a id="blog_nav_admin" class="menu" rel="nofollow" href="https://i.cnblogs.com/">管理</a></li>
+</ul>
+		<div class="blogStats">
+			
+			<div id="blog_stats">
+<span id="stats_post_count">随笔 - 43&nbsp; </span>
+<span id="stats_article_count">文章 - 0&nbsp; </span>
+<span id="stats-comment_count">评论 - 68</span>
+</div>
+			
+		</div><!--end: blogStats -->
+	</div><!--end: navigator 博客导航栏 -->
+</div><!--end: header 头部 -->
+
+<div id="main">
+	<div id="mainContent">
+	<div class="forFlow">
+		
+<div id="post_detail">
+<!--done-->
+<div id="topics">
+	<div class="post">
+		<h1 class="postTitle">
+			<a id="cb_post_title_url" class="postTitle2" href="http://www.cnblogs.com/popfisher/p/5731232.html">Windows下Git多账号配置，同一电脑多个ssh-key的管理</a>
+		</h1>
+		<div class="clear"></div>
+		<div class="postBody">
+			<div id="cnblogs_post_body" class="blogpost-body"><p><span style="font-family: &#39;Microsoft YaHei&#39;; font-size: 15px;">　　这一篇文章是对上一篇文章<a href="http://www.cnblogs.com/popfisher/p/5466174.html" target="_blank"><strong>《Git-TortoiseGit完整配置流程》</strong></a>的拓展，所以需要对上一篇文章有所了解，当然直接往下看也可以，其中也有一些提到一些基础的操作。</span></p>
+<p><span style="font-family: &#39;Microsoft YaHei&#39;; font-size: 15px;">　　本文以配置<strong>github.com</strong>账号和<strong>git.oschina.net</strong>账号来逐步演示在Windows环境下配置<strong>Git多账号支持</strong>即在同一个电脑上<strong>管理多个ssh-key</strong>，对git多一分了解。</span></p>
+<p><span style="font-family: &#39;Microsoft YaHei&#39;; font-size: 15px;"><strong>　　<span style="color: #ff0000;">备注：</span></strong>这篇文章所有执行命令的地方都是在管理员模式下进行，即打开<strong>cmd，Git Bash</strong>客户端<strong>用管理员身份运行程序。</strong></span></p>
+<hr>
+<h1 id="1-github-com-c-users-popfisher-"><span style="font-family: &#39;Microsoft YaHei&#39;; font-size: 16px;">1. 生成github.com对应的私钥公钥（本文中文件地址C:\Users\popfisher目录）</span></h1>
+<p><span style="font-family: &#39;Microsoft YaHei&#39;; font-size: 15px;">执行命令&nbsp;<strong>ssh-keygen -t rsa -C email&nbsp;</strong>创建github对应的sshkey，命名为<strong>id_rsa_github</strong>，密码&nbsp;<strong>123456&nbsp;</strong></span></p>
+<div class="cnblogs_code">
+<pre><span style="font-family: &#39;Microsoft YaHei&#39;; font-size: 15px;"><span style="color: #0000ff;">ssh-keygen</span> -t rsa -C <span style="color: #800080;">774232122</span>@qq.com</span></pre>
+</div>
+<p><span style="font-family: &#39;Microsoft YaHei&#39;; font-size: 15px;"><img src="./Windows下Git多账号配置，同一电脑多个ssh-key的管理 - popfisher - 博客园_files/823551-20160802225245231-1157480176.png" alt=""></span></p>
+<p>&nbsp;</p>
+<h1 id="2-git-oschina-net-"><span style="font-family: &#39;Microsoft YaHei&#39;; font-size: 16px;">2. 同样的方式生产git.oschina.net的私钥公钥（邮箱地址可以相同可以不同，本文相同）</span></h1>
+<p><span style="font-family: &#39;Microsoft YaHei&#39;; font-size: 15px;">执行命令<strong>ssh-keygen -t rsa -C email</strong>创建github对应的sshkey，命名为<strong>id_rsa_oschina，密码</strong>&nbsp;<strong>123456</strong>&nbsp;</span></p>
+<div class="cnblogs_code">
+<pre><span style="font-family: &#39;Microsoft YaHei&#39;; font-size: 15px;"><span style="color: #0000ff;">ssh-keygen</span> -t rsa -C <span style="color: #800080;">774232122</span>@qq.com</span></pre>
+</div>
+<p><span style="font-family: &#39;Microsoft YaHei&#39;; font-size: 15px;"><img src="./Windows下Git多账号配置，同一电脑多个ssh-key的管理 - popfisher - 博客园_files/823551-20160802225724684-372123375.png" alt=""></span></p>
+<p><span style="font-family: &#39;Microsoft YaHei&#39;; font-size: 15px;">&nbsp;</span></p>
+<h1 id="3-git-ssh-win10-c-users-popfisher-ssh-"><span style="font-family: &#39;Microsoft YaHei&#39;; font-size: 16px;">3. 把上面得到的文件拷贝到git默认访问的.ssh目录(win10在用户目录下，本文C:\Users\popfisher.ssh)</span></h1>
+<p><span style="font-family: &#39;Microsoft YaHei&#39;; font-size: 15px;">除了秘钥文件之外，<strong>config</strong>文件是后面的步骤中手动生产的，<strong>known_hosts</strong>文件是后续自动生产的</span></p>
+<p><span style="font-family: &#39;Microsoft YaHei&#39;; font-size: 15px;">&nbsp;<img src="./Windows下Git多账号配置，同一电脑多个ssh-key的管理 - popfisher - 博客园_files/823551-20160802225856481-1245177255.png" alt=""></span></p>
+<h1 id="4-github-oschina-"><span style="font-family: &#39;Microsoft YaHei&#39;; font-size: 16px;">4. 把github对应的公钥和oschina对应的公钥上传到服务器</span></h1>
+<h2><strong><span style="font-family: &#39;Microsoft YaHei&#39;; font-size: 15px;">&nbsp;GitHub添加SSH key的方式如下图所示：</span></strong></h2>
+<p><span style="font-family: &#39;Microsoft YaHei&#39;; font-size: 15px;"><img src="./Windows下Git多账号配置，同一电脑多个ssh-key的管理 - popfisher - 博客园_files/823551-20160802230012465-514854770.png" alt="" width="899" height="598"></span></p>
+<p><span style="font-family: &#39;Microsoft YaHei&#39;; font-size: 15px;">&nbsp;</span></p>
+<h2><strong><span style="font-family: &#39;Microsoft YaHei&#39;; font-size: 15px;">git.oschina.net添加SSH key的方式如下图所示：</span></strong></h2>
+<p><span style="font-family: &#39;Microsoft YaHei&#39;; font-size: 15px;"><img src="./Windows下Git多账号配置，同一电脑多个ssh-key的管理 - popfisher - 博客园_files/823551-20160802230148512-53807233.png" alt="" width="901" height="694"></span></p>
+<p><span style="font-family: &#39;Microsoft YaHei&#39;; font-size: 15px;">&nbsp;</span></p>
+<h1 id="5-ssh-config-"><span style="font-family: &#39;Microsoft YaHei&#39;; font-size: 16px;">5. 在.ssh目录创建config文本文件并完成相关配置(<span style="color: #ff0000;">最核心的地方</span>)</span></h1>
+<p><span style="font-family: &#39;Microsoft YaHei&#39;; font-size: 15px;">每个账号单独配置一个<span style="color: #ff0000;"><strong>Host</strong></span>，每个<span style="color: #ff0000;"><strong>Host</strong></span>要取一个别名，每个Host主要配置<span style="color: #ff0000;"><strong>HostName</strong></span>和<span style="color: #ff0000;"><strong>IdentityFile</strong></span>两个属性即可</span></p>
+<p><span style="font-family: &#39;Microsoft YaHei&#39;; font-size: 15px;"><span style="color: #ff0000;"><strong>Host</strong></span>的名字可以取为自己喜欢的名字，不过这个会影响git相关命令，例如：</span><br><span style="font-family: &#39;Microsoft YaHei&#39;; font-size: 15px;"><span style="color: #ff0000;"><strong>Host</strong> </span>mygithub 这样定义的话，命令如下，即git@后面紧跟的名字改为<span style="color: #ff0000;"><strong>mygithub</strong></span></span><br><span style="font-family: &#39;Microsoft YaHei&#39;; font-size: 15px;">git clone  git@<span style="color: #ff0000;"><strong>mygithub</strong></span>:PopFisher/AndroidRotateAnim.git</span></p>
+<p><span style="font-family: &#39;Microsoft YaHei&#39;; font-size: 15px;">&nbsp;</span></p>
+<p><span style="font-family: &#39;Microsoft YaHei&#39;; font-size: 15px;"><span style="color: #ff0000;"><strong>HostName</strong> 　　　　　　　 &nbsp;&nbsp;</span>这个是真实的域名地址</span><br><span style="font-family: &#39;Microsoft YaHei&#39;; font-size: 15px;"><span style="color: #ff0000;"><strong>IdentityFile</strong></span> 　　　　　　　 &nbsp;这里是id_rsa的地址</span><br><span style="font-family: &#39;Microsoft YaHei&#39;; font-size: 15px;"><span style="color: #ff0000;"><strong>PreferredAuthentications</strong></span>&nbsp; &nbsp;配置登录时用什么权限认证--可设为<code>publickey,password publickey,keyboard-interactive等</code></span><br><span style="font-family: &#39;Microsoft YaHei&#39;; font-size: 15px;"><span style="color: #ff0000;"><strong>User</strong></span> 　　　　　　　　　　　配置使用用户名</span></p>
+<p><span style="font-family: &#39;Microsoft YaHei&#39;; font-size: 15px;">&nbsp;</span></p>
+<h2><strong><span style="font-family: &#39;Microsoft YaHei&#39;; font-size: 15px;">config文件配置如下：</span></strong></h2>
+<div class="cnblogs_code"><div class="cnblogs_code_toolbar"><span class="cnblogs_code_copy"><a href="javascript:void(0);" onclick="copyCnblogsCode(this)" title="复制代码"><img src="./Windows下Git多账号配置，同一电脑多个ssh-key的管理 - popfisher - 博客园_files/copycode.gif" alt="复制代码"></a></span></div>
+<pre><span style="font-family: &#39;Microsoft YaHei&#39;; font-size: 15px;"><strong><span style="color: #000000;"># 配置github.com</span></strong><span style="color: #000000;">
+Host <span style="color: #ff0000;"><strong>github.com</strong>                 
+    <strong>HostName</strong></span> github.com
+    <span style="color: #ff0000;"><strong>IdentityFile</strong></span> C:\\Users\\popfisher\\.</span><span style="color: #0000ff;">ssh</span><span style="color: #000000;">\\id_rsa_github
+    PreferredAuthentications publickey
+    User username1
+
+<strong># 配置git.oschina.net</strong> 
+Host<span style="color: #ff0000;"><strong> git.oschina.net</strong> 
+    <strong>HostName</strong></span> git.oschina.net
+    <span style="color: #ff0000;"><strong>IdentityFile</strong></span> C:\\Users\\popfisher\\.</span><span style="color: #0000ff;">ssh</span><span style="color: #000000;">\\id_rsa_oschina
+    PreferredAuthentications publickey
+    User username2</span></span></pre>
+<div class="cnblogs_code_toolbar"><span class="cnblogs_code_copy"><a href="javascript:void(0);" onclick="copyCnblogsCode(this)" title="复制代码"><img src="./Windows下Git多账号配置，同一电脑多个ssh-key的管理 - popfisher - 博客园_files/copycode.gif" alt="复制代码"></a></span></div></div>
+<p><span style="font-family: &#39;Microsoft YaHei&#39;; font-size: 15px;">&nbsp;</span></p>
+<h1><span style="font-family: &#39;Microsoft YaHei&#39;; font-size: 16px;">&nbsp;6. 打开Git Bash客户端（管理员身份运行）执行测试命令测试是否配置成功（会自动在.ssh目录生成known_hosts文件把私钥配置进去）</span></h1>
+<p><span style="font-family: &#39;Microsoft YaHei&#39;; font-size: 15px;">&nbsp;<img src="./Windows下Git多账号配置，同一电脑多个ssh-key的管理 - popfisher - 博客园_files/823551-20160802231733606-1986856038.png" alt=""></span></p>
+<p>&nbsp;</p>
+<h1><span style="font-family: &#39;Microsoft YaHei&#39;; font-size: 16px;">7. 测试成功之后就可以在电脑上同时使用git多多账号同时操作，互不影响了</span></h1>
+<h2><strong><span style="font-family: &#39;Microsoft YaHei&#39;; font-size: 15px;">clone github上的项目AndroidRotateAnim</span></strong></h2>
+<p><span style="font-family: &#39;Microsoft YaHei&#39;; font-size: 15px;">　　打开github上<strong>AndroidRotateAnim</strong>项目，复制其对应的clone命令入下图所示</span></p>
+<p><span style="font-family: &#39;Microsoft YaHei&#39;; font-size: 15px;"><img src="./Windows下Git多账号配置，同一电脑多个ssh-key的管理 - popfisher - 博客园_files/823551-20160802232941950-660367585.png" alt="" width="944" height="502"></span></p>
+<h2><strong><span style="font-family: &#39;Microsoft YaHei&#39;; font-size: 15px;">&nbsp;执行clone命令如下：</span></strong></h2>
+<p><span style="font-family: &#39;Microsoft YaHei&#39;; font-size: 15px;">&nbsp;<img src="./Windows下Git多账号配置，同一电脑多个ssh-key的管理 - popfisher - 博客园_files/823551-20160802233223325-622699075.png" alt=""></span></p>
+<p><span style="font-family: &#39;Microsoft YaHei&#39;; font-size: 15px;">&nbsp;</span></p>
+<h2><strong><span style="font-family: &#39;Microsoft YaHei&#39;; font-size: 15px;">clone oschina.net上的项目AndroidDevTools</span></strong></h2>
+<p><span style="font-family: &#39;Microsoft YaHei&#39;; font-size: 15px;">　　打开git.oschina.net上<strong>AndroidDevTools</strong>项目，复制其对应的clone命令入下图所示</span></p>
+<p><span style="font-family: &#39;Microsoft YaHei&#39;; font-size: 15px;">&nbsp;<img src="./Windows下Git多账号配置，同一电脑多个ssh-key的管理 - popfisher - 博客园_files/823551-20160802233428762-233230470.png" alt="" width="968" height="676"></span></p>
+<h2><strong><span style="font-family: &#39;Microsoft YaHei&#39;; font-size: 15px;">&nbsp;执行clone命令如下：</span></strong></h2>
+<p><span style="font-family: &#39;Microsoft YaHei&#39;; font-size: 15px;"><img src="./Windows下Git多账号配置，同一电脑多个ssh-key的管理 - popfisher - 博客园_files/823551-20160802233820512-1886158801.png" alt=""></span></p>
+<p>&nbsp;</p>
+<h1><span style="font-size: 16px;"><strong><span style="font-family: &#39;Microsoft YaHei&#39;;">学习心得</span></strong></span></h1>
+<p><span style="font-family: &#39;Microsoft YaHei&#39;; font-size: 15px;">　　在使用git的过程中，一般都只关注单账号的情况吗，工作中的配置也是直接由自己的上级发一个配置文档之类的东西，然后对着搞一遍就行了，可是当自己真正有这个需求的时候，突然发现束手无策。我自己当时也属于这个情况，有一天在家里，突然发现自己需要一台电脑支持多个SSH key的时候才发现自己不知道怎么下手了，于是就下定决心自己动手研究一下。对于技术，还是要亲自动手实践，实践出来的东西才能形成自己的真理，才不那么容易忘记。&nbsp;</span></p>
+<p><span style="font-family: &#39;Microsoft YaHei&#39;; font-size: 15px;">　　这篇文章是我基于Win10平台上的实践，由于知识有限，可能还是没有总结得很完整，也可能在其他平台上会遇到一些其他的问题，没有时间去研究了，如果读者有遇到什么问题，欢迎留言讨论，共同学习。</span></p>
+<p><span style="font-family: &#39;Microsoft YaHei&#39;; font-size: 15px;">&nbsp;</span></p></div><div id="MySignature"></div>
+<div class="clear"></div>
+<div id="blog_post_info_block">
+<div id="BlogPostCategory">分类: <a href="http://www.cnblogs.com/popfisher/category/825565.html" target="_blank">Git</a></div>
+<div id="EntryTag">标签: <a href="http://www.cnblogs.com/popfisher/tag/Git/">Git</a>, <a href="http://www.cnblogs.com/popfisher/tag/Git%E9%85%8D%E7%BD%AE/">Git配置</a>, <a href="http://www.cnblogs.com/popfisher/tag/Git%E5%A4%9A%E8%B4%A6%E5%8F%B7%E9%85%8D/">Git多账号配</a>, <a href="http://www.cnblogs.com/popfisher/tag/Git%E5%A4%9A%E4%B8%AASSH%20key%E7%AE%A1%E7%90%86/">Git多个SSH key管理</a></div>
+<div id="blog_post_info"><div id="green_channel">
+        <a href="javascript:void(0);" id="green_channel_digg" onclick="DiggIt(5731232,cb_blogId,1);green_channel_success(this,&#39;谢谢推荐！&#39;);">好文要顶</a>
+            <a id="green_channel_follow" onclick="follow(&#39;739d96b0-c573-e511-9fc1-ac853d9f53cc&#39;);" href="javascript:void(0);">关注我</a>
+    <a id="green_channel_favorite" onclick="AddToWz(cb_entryId);return false;" href="javascript:void(0);">收藏该文</a>
+    <a id="green_channel_weibo" href="javascript:void(0);" title="分享至新浪微博" onclick="ShareToTsina()"><img src="./Windows下Git多账号配置，同一电脑多个ssh-key的管理 - popfisher - 博客园_files/icon_weibo_24.png" alt=""></a>
+    <a id="green_channel_wechat" href="javascript:void(0);" title="分享至微信" onclick="shareOnWechat()"><img src="./Windows下Git多账号配置，同一电脑多个ssh-key的管理 - popfisher - 博客园_files/wechat.png" alt=""></a>
+</div>
+<div id="author_profile">
+    <div id="author_profile_info" class="author_profile_info">
+            <a href="http://home.cnblogs.com/u/popfisher/" target="_blank"><img src="./Windows下Git多账号配置，同一电脑多个ssh-key的管理 - popfisher - 博客园_files/20160708111324.png" class="author_avatar" alt=""></a>
+        <div id="author_profile_detail" class="author_profile_info">
+            <a href="http://home.cnblogs.com/u/popfisher/">popfisher</a><br>
+            <a href="http://home.cnblogs.com/u/popfisher/followees">关注 - 8</a><br>
+            <a href="http://home.cnblogs.com/u/popfisher/followers">粉丝 - 26</a>
+        </div>
+    </div>
+    <div class="clear"></div>
+    <div id="author_profile_honor"></div>
+    <div id="author_profile_follow">
+                <a href="javascript:void(0);" onclick="follow(&#39;739d96b0-c573-e511-9fc1-ac853d9f53cc&#39;);return false;">+加关注</a>
+    </div>
+</div>
+<div id="div_digg">
+    <div class="diggit" onclick="votePost(5731232,&#39;Digg&#39;)">
+        <span class="diggnum" id="digg_count">14</span>
+    </div>
+    <div class="buryit" onclick="votePost(5731232,&#39;Bury&#39;)">
+        <span class="burynum" id="bury_count">0</span>
+    </div>
+    <div class="clear"></div>
+    <div class="diggword" id="digg_tips">
+    </div>
+</div>
+<script type="text/javascript">
+    currentDiggType = 0;
+</script></div>
+<div class="clear"></div>
+<div id="post_next_prev"><a href="http://www.cnblogs.com/popfisher/p/5709202.html" class="p_n_p_prefix">« </a> 上一篇：<a href="http://www.cnblogs.com/popfisher/p/5709202.html" title="发布于2016-07-26 22:28">Android ScrollView监听滑动到顶部和底部的两种方式（你可能不知道的细节）</a><br><a href="http://www.cnblogs.com/popfisher/p/5840791.html" class="p_n_p_prefix">» </a> 下一篇：<a href="http://www.cnblogs.com/popfisher/p/5840791.html" title="发布于2016-09-04 23:43">Android动画：模拟开关按钮点击打开动画（属性动画之平移动画）</a><br></div>
+</div>
+
+
+		</div>
+		<div class="postDesc">posted @ <span id="post-date">2016-08-03 00:01</span> <a href="http://www.cnblogs.com/popfisher/">popfisher</a> 阅读(<span id="post_view_count">11580</span>) 评论(<span id="post_comment_count">5</span>)  <a href="https://i.cnblogs.com/EditPosts.aspx?postid=5731232" rel="nofollow">编辑</a> <a href="https://www.cnblogs.com/popfisher/p/5731232.html#" onclick="AddToWz(5731232);return false;">收藏</a></div>
+	</div>
+	<script type="text/javascript">var allowComments=true,cb_blogId=249347,cb_entryId=5731232,cb_blogApp=currentBlogApp,cb_blogUserGuid='739d96b0-c573-e511-9fc1-ac853d9f53cc',cb_entryCreatedDate='2016/8/3 0:01:00';loadViewCount(cb_entryId);var cb_postType=1;</script>
+	
+</div><!--end: topics 文章、评论容器-->
+</div><a name="!comments"></a><div id="blog-comments-placeholder"><div id="comments_pager_top"></div>
+<br>
+<div class="feedback_area_title">评论列表</div>
+<div class="feedbackNoItems"></div>	
+
+		<div class="feedbackItem">
+			<div class="feedbackListSubtitle">
+				<div class="feedbackManage">
+					&nbsp;&nbsp;<span class="comment_actions"><a href="javascript:void(0);" onclick="return ReplyComment(3481811,&#39;mnkwjy7LRGIQbHvQiR5fMY6Ryo6K5DR/DEQqYo8VlH27N+It2jT23g==&#39;)">回复</a><a href="javascript:void(0);" onclick="return QuoteComment(3481811,&#39;mnkwjy7LRGIQbHvQiR5fMY6Ryo6K5DR/DEQqYo8VlH27N+It2jT23g==&#39;)">引用</a></span>
+				</div>
+				<a href="https://www.cnblogs.com/popfisher/p/5731232.html#3481811" class="layer">#1楼</a><a name="3481811" id="comment_anchor_3481811"></a>  <span class="comment_date">2016-08-03 08:10</span> <a id="a_comment_author_3481811" href="http://www.cnblogs.com/richieyang/" target="_blank">richiezhang</a> <a href="http://msg.cnblogs.com/send/richiezhang" title="发送站内短消息" class="sendMsg2This">&nbsp;</a>
+			</div>
+			<div class="feedbackCon">
+				<div id="comment_body_3481811" class="blog_comment_body">不错哦，学习了</div><div class="comment_vote"><a href="javascript:void(0);" class="comment_digg" onclick="return voteComment(3481811,&#39;Digg&#39;,this)">支持(1)</a><a href="javascript:void(0);" class="comment_bury" onclick="return voteComment(3481811,&#39;Bury&#39;,this)">反对(0)</a></div><span id="comment_3481811_avatar" style="display:none;">http://pic.cnblogs.com/face/600216/20140118232824.png</span>
+			</div>
+		</div>
+	
+		<div class="feedbackItem">
+			<div class="feedbackListSubtitle">
+				<div class="feedbackManage">
+					&nbsp;&nbsp;<span class="comment_actions"><a href="javascript:void(0);" onclick="return ReplyComment(3481912,&#39;QZCkWwnqyk+/oFBeHaJC59bS886VP4dNNPx2HYGxyve5im9r+5N7JA==&#39;)">回复</a><a href="javascript:void(0);" onclick="return QuoteComment(3481912,&#39;QZCkWwnqyk+/oFBeHaJC59bS886VP4dNNPx2HYGxyve5im9r+5N7JA==&#39;)">引用</a></span>
+				</div>
+				<a href="https://www.cnblogs.com/popfisher/p/5731232.html#3481912" class="layer">#2楼</a><a name="3481912" id="comment_anchor_3481912"></a>[<span class="louzhu">楼主</span>]  <span class="comment_date">2016-08-03 10:00</span> <a id="a_comment_author_3481912" href="http://www.cnblogs.com/popfisher/" target="_blank">popfisher</a> <a href="http://msg.cnblogs.com/send/popfisher" title="发送站内短消息" class="sendMsg2This">&nbsp;</a>
+			</div>
+			<div class="feedbackCon">
+				<div id="comment_body_3481912" class="blog_comment_body"><a href="https://www.cnblogs.com/popfisher/p/5731232.html#3481811" title="查看所回复的评论" onclick="commentManager.renderComments(0,50,3481811);">@</a>
+richiezhang<br>谢谢支持</div><div class="comment_vote"><a href="javascript:void(0);" class="comment_digg" onclick="return voteComment(3481912,&#39;Digg&#39;,this)">支持(0)</a><a href="javascript:void(0);" class="comment_bury" onclick="return voteComment(3481912,&#39;Bury&#39;,this)">反对(0)</a></div><span id="comment_3481912_avatar" style="display:none;">http://pic.cnblogs.com/face/823551/20160708111324.png</span>
+			</div>
+		</div>
+	
+		<div class="feedbackItem">
+			<div class="feedbackListSubtitle">
+				<div class="feedbackManage">
+					&nbsp;&nbsp;<span class="comment_actions"><a href="javascript:void(0);" onclick="return ReplyComment(3620868,&#39;QqZ16UmS/J0ItD4zznWdW+cGl/2kSbdZeWL80U1PyVCJmRhKrVGRaA==&#39;)">回复</a><a href="javascript:void(0);" onclick="return QuoteComment(3620868,&#39;QqZ16UmS/J0ItD4zznWdW+cGl/2kSbdZeWL80U1PyVCJmRhKrVGRaA==&#39;)">引用</a></span>
+				</div>
+				<a href="https://www.cnblogs.com/popfisher/p/5731232.html#3620868" class="layer">#3楼</a><a name="3620868" id="comment_anchor_3620868"></a>  <span class="comment_date">2017-02-17 14:39</span> <a id="a_comment_author_3620868" href="http://www.cnblogs.com/lqfxyy/" target="_blank">飘在江湖</a> <a href="http://msg.cnblogs.com/send/%E9%A3%98%E5%9C%A8%E6%B1%9F%E6%B9%96" title="发送站内短消息" class="sendMsg2This">&nbsp;</a>
+			</div>
+			<div class="feedbackCon">
+				<div id="comment_body_3620868" class="blog_comment_body">谢谢</div><div class="comment_vote"><a href="javascript:void(0);" class="comment_digg" onclick="return voteComment(3620868,&#39;Digg&#39;,this)">支持(0)</a><a href="javascript:void(0);" class="comment_bury" onclick="return voteComment(3620868,&#39;Bury&#39;,this)">反对(0)</a></div>
+			</div>
+		</div>
+	
+		<div class="feedbackItem">
+			<div class="feedbackListSubtitle">
+				<div class="feedbackManage">
+					&nbsp;&nbsp;<span class="comment_actions"><a href="javascript:void(0);" onclick="return ReplyComment(3767623,&#39;dhDun/3NX2hd26kK6Syl/GeCngAqnKnWK6RlhlKYuYVEPvBMohe36A==&#39;)">回复</a><a href="javascript:void(0);" onclick="return QuoteComment(3767623,&#39;dhDun/3NX2hd26kK6Syl/GeCngAqnKnWK6RlhlKYuYVEPvBMohe36A==&#39;)">引用</a></span>
+				</div>
+				<a href="https://www.cnblogs.com/popfisher/p/5731232.html#3767623" class="layer">#4楼</a><a name="3767623" id="comment_anchor_3767623"></a>  <span class="comment_date">2017-08-27 18:06</span> <a id="a_comment_author_3767623" href="http://www.cnblogs.com/1102whw/" target="_blank">学计算机的人绝不认输</a> <a href="http://msg.cnblogs.com/send/%E5%AD%A6%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%9A%84%E4%BA%BA%E7%BB%9D%E4%B8%8D%E8%AE%A4%E8%BE%93" title="发送站内短消息" class="sendMsg2This">&nbsp;</a>
+			</div>
+			<div class="feedbackCon">
+				<div id="comment_body_3767623" class="blog_comment_body">谢谢，</div><div class="comment_vote"><a href="javascript:void(0);" class="comment_digg" onclick="return voteComment(3767623,&#39;Digg&#39;,this)">支持(0)</a><a href="javascript:void(0);" class="comment_bury" onclick="return voteComment(3767623,&#39;Bury&#39;,this)">反对(0)</a></div><span id="comment_3767623_avatar" style="display:none;">http://pic.cnblogs.com/face/782554/20171122160644.png</span>
+			</div>
+		</div>
+	
+		<div class="feedbackItem">
+			<div class="feedbackListSubtitle">
+				<div class="feedbackManage">
+					&nbsp;&nbsp;<span class="comment_actions"><a href="javascript:void(0);" onclick="return ReplyComment(3914778,&#39;fReBY13tf43X3Qb1gmQrbt2O5n34JgK2ZIgUjQno7vmZJ9D3kV4Dvw==&#39;)">回复</a><a href="javascript:void(0);" onclick="return QuoteComment(3914778,&#39;fReBY13tf43X3Qb1gmQrbt2O5n34JgK2ZIgUjQno7vmZJ9D3kV4Dvw==&#39;)">引用</a></span>
+				</div>
+				<a href="https://www.cnblogs.com/popfisher/p/5731232.html#3914778" class="layer">#5楼</a><a name="3914778" id="comment_anchor_3914778"></a><span id="comment-maxId" style="display:none;">3914778</span><span id="comment-maxDate" style="display:none;">2018/3/4 19:43:27</span>  <span class="comment_date">2018-03-04 19:43</span> <a id="a_comment_author_3914778" href="http://www.cnblogs.com/billyu/" target="_blank">WinjayYu</a> <a href="http://msg.cnblogs.com/send/WinjayYu" title="发送站内短消息" class="sendMsg2This">&nbsp;</a>
+			</div>
+			<div class="feedbackCon">
+				<div id="comment_body_3914778" class="blog_comment_body">谢谢！</div><div class="comment_vote"><a href="javascript:void(0);" class="comment_digg" onclick="return voteComment(3914778,&#39;Digg&#39;,this)">支持(0)</a><a href="javascript:void(0);" class="comment_bury" onclick="return voteComment(3914778,&#39;Bury&#39;,this)">反对(0)</a></div><span id="comment_3914778_avatar" style="display:none;">http://pic.cnblogs.com/face/780376/20160820085148.png</span>
+			</div>
+		</div>
+	<div id="comments_pager_bottom"></div></div><script type="text/javascript">var commentManager = new blogCommentManager();commentManager.renderComments(0);</script>
+<div id="comment_form" class="commentform">
+<a name="commentform"></a>
+<div id="divCommentShow"></div>
+<div id="comment_nav"><span id="span_refresh_tips"></span><a href="javascript:void(0);" onclick="return RefreshCommentList();" id="lnk_RefreshComments" runat="server" clientidmode="Static">刷新评论</a><a href="https://www.cnblogs.com/popfisher/p/5731232.html#" onclick="return RefreshPage();">刷新页面</a><a href="https://www.cnblogs.com/popfisher/p/5731232.html#top">返回顶部</a></div>
+<div id="comment_form_container"><script type="text/javascript" src="./Windows下Git多账号配置，同一电脑多个ssh-key的管理 - popfisher - 博客园_files/mention.js.下载"></script>
+<div id="commentform_title">发表评论</div>
+<span id="tip_comment" style="color:Red"></span>
+<p>
+昵称：<input type="text" id="tbCommentAuthor" class="author" disabled="disabled" size="50" value="lumor">
+</p>
+<div class="commentbox_main">
+<div class="commentbox_title">
+<div class="commentbox_title_left">评论内容：</div>
+<div class="commentbox_title_right">
+<img id="ubb_quote" class="comment_icon" src="./Windows下Git多账号配置，同一电脑多个ssh-key的管理 - popfisher - 博客园_files/quote.gif" alt="引用" title="添加引用" onclick="insertUBB(&#39;tbCommentBody&#39;,&#39;quote&#39;)">
+<img id="ubb_bold" class="comment_icon" src="./Windows下Git多账号配置，同一电脑多个ssh-key的管理 - popfisher - 博客园_files/b.png" alt="粗体" title="添加粗体" onclick="insertUBB(&#39;tbCommentBody&#39;,&#39;b&#39;)">
+<img id="ubb_url" class="comment_icon" src="./Windows下Git多账号配置，同一电脑多个ssh-key的管理 - popfisher - 博客园_files/lk.png" alt="链接" title="添加链接" onclick="insertUbbUrl(&#39;tbCommentBody&#39;)">
+<img id="ubb_indent" class="comment_icon" src="./Windows下Git多账号配置，同一电脑多个ssh-key的管理 - popfisher - 博客园_files/indent.png" alt="缩进" title="添加首行缩进" onclick="insertIndent(&#39;tbCommentBody&#39;)">
+<img id="ubb_code" class="comment_icon" src="./Windows下Git多账号配置，同一电脑多个ssh-key的管理 - popfisher - 博客园_files/InsertCode.gif" alt="代码" title="添加代码" onclick="insertUbbCode()">
+<img id="ubb_img" class="comment_icon" src="./Windows下Git多账号配置，同一电脑多个ssh-key的管理 - popfisher - 博客园_files/img.gif" alt="图片" title="上传图片" onclick="OpenImageUploadWindow();">
+</div>
+</div>
+<div class="clear"></div>
+<textarea id="tbCommentBody" class="comment_textarea"></textarea>
+</div>
+<p id="commentbox_opt">
+<input id="btn_comment_submit" type="button" class="comment_btn" value="提交评论">
+<span id="span_comment_canceledit" style="display:none"><a href="javascript:void(0);" onclick="return CancelCommentEdit()">不改了</a></span>
+<a href="javascript:void(0);" onclick="return logout();">退出</a>
+        <a id="commentbox_opt_sub" href="javascript:void(0);" title="订阅后有新评论时会邮件通知您" onclick="commentManager.Subscribe()">订阅评论</a>
+</p>
+<div id="tip_comment2" style="color:Red"></div>
+<p>
+[Ctrl+Enter快捷键提交]
+</p>
+<div style="display:none">
+<span id="comment_edit_id"></span><span id="span_parentcomment_id"></span>
+<span id="span_parent_id"></span>
+<span id="span_comment_replyto"></span>
+<span id="span_comment_posted"></span>
+</div>
+</div>
+<div class="ad_text_commentbox" id="ad_text_under_commentbox"></div>
+<div id="ad_t2"><a href="http://www.ucancode.com/index.htm" target="_blank">【推荐】超50万VC++源码: 大型组态工控、电力仿真CAD与GIS源码库！</a><br><a href="http://click.aliyun.com/m/43774/" target="_blank">【缅怀】传奇谢幕，回顾霍金76载传奇人生</a><br><a href="https://cloud.tencent.com/act/campus?fromSource=gwzcw.860539.860539.860539" target="_blank">【推荐】腾讯云校园拼团福利，1核2G服务器10元/月！</a><br><a href="https://www.yunqi2050.com/#/index" target="_blank">【活动】2050 科技公益大会 - 年青人因科技而团聚</a><br></div>
+<div id="opt_under_post"></div>
+<div id="cnblogs_c1" class="c_ad_block"><a href="https://market.qcloud.com/act/wangjian/?fromSource=gwzcw.860541.860541.860541" target="_blank"><img width="300" height="250" src="./Windows下Git多账号配置，同一电脑多个ssh-key的管理 - popfisher - 博客园_files/24442-20180314220122373-1718033865.jpg" alt="qcloud0314"></a></div>
+<div id="under_post_news"><div class="itnews c_ad_block"><b>最新IT新闻</b>:<br> ·  <a href="https://news.cnblogs.com/n/592210/" target="_blank">Facebook宣布聘请外部公司调查用户数据泄密事件</a><br> ·  <a href="https://news.cnblogs.com/n/592209/" target="_blank">“Uber撞死人”将让外界对自动驾驶信心倒退若干年</a><br> ·  <a href="https://news.cnblogs.com/n/592208/" target="_blank">无人驾驶汽车出车祸，到底谁该负责？</a><br> ·  <a href="https://news.cnblogs.com/n/592200/" target="_blank">小鹏汽车将获正式牌照 互联网车企的量产竞速赛</a><br> ·  <a href="https://news.cnblogs.com/n/592203/" target="_blank">数据泄露说明FB存在系统问题 机构重申对该股”卖出“评级</a><br>» <a href="http://news.cnblogs.com/" title="IT新闻" target="_blank">更多新闻...</a></div></div>
+<div id="cnblogs_c2" class="c_ad_block"><a href="http://click.aliyun.com/m/42835/" target="_blank"><img width="468" height="60" src="./Windows下Git多账号配置，同一电脑多个ssh-key的管理 - popfisher - 博客园_files/TB1mEZFaWmWBuNjy1XaXXXCbXXa-468-60.jpg" alt="阿里云0308"></a></div>
+<div id="under_post_kb"><div class="itnews c_ad_block" id="kb_block"><b>最新知识库文章</b>:<br><div id="kb_recent"> ·  <a href="http://kb.cnblogs.com/page/575255/" target="_blank">写给自学者的入门指南</a><br> ·  <a href="http://kb.cnblogs.com/page/578690/" target="_blank">和程序员谈恋爱</a><br> ·  <a href="http://kb.cnblogs.com/page/585734/" target="_blank">学会学习</a><br> ·  <a href="http://kb.cnblogs.com/page/588938/" target="_blank">优秀技术人的管理陷阱</a><br> ·  <a href="http://kb.cnblogs.com/page/590141/" target="_blank">作为一个程序员，数学对你到底有多重要</a><br></div>» <a href="http://kb.cnblogs.com/" target="_blank">更多知识库文章...</a></div></div>
+<div id="HistoryToday" class="c_ad_block"></div>
+<script type="text/javascript">
+    fixPostBody();
+    setTimeout(function () { incrementViewCount(cb_entryId); }, 50);
+    deliverAdT2();
+    deliverAdC1();
+    deliverAdC2();    
+    loadNewsAndKb();
+    loadBlogSignature();
+    LoadPostInfoBlock(cb_blogId, cb_entryId, cb_blogApp, cb_blogUserGuid);
+    GetPrevNextPost(cb_entryId, cb_blogId, cb_entryCreatedDate, cb_postType);
+    loadOptUnderPost();
+    GetHistoryToday(cb_blogId, cb_blogApp, cb_entryCreatedDate);   
+</script>
+</div>
+
+
+	</div><!--end: forFlow -->
+	</div><!--end: mainContent 主体内容容器-->
+
+	<div id="sideBar">
+		<div id="sideBarMain">
+			
+<!--done-->
+<div class="newsItem">
+<h3 class="catListTitle">公告</h3>
+	<div id="blog-news"><div id="profile_block">昵称：<a href="https://home.cnblogs.com/u/popfisher/">popfisher</a><br>园龄：<a href="https://home.cnblogs.com/u/popfisher/" title="入园时间：2015-10-16">2年5个月</a><br>粉丝：<a href="https://home.cnblogs.com/u/popfisher/followers/">26</a><br>关注：<a href="https://home.cnblogs.com/u/popfisher/followees/">8</a><div id="p_b_follow"><a href="javascript:void(0);" onclick="follow(&#39;739d96b0-c573-e511-9fc1-ac853d9f53cc&#39;)">+加关注</a></div><script>getFollowStatus('739d96b0-c573-e511-9fc1-ac853d9f53cc')</script></div></div><script type="text/javascript">loadBlogNews();</script>
+</div>
+
+			<div id="blog-calendar" style=""><table id="blogCalendar" class="Cal" cellspacing="0" cellpadding="0" title="Calendar">
+	<tbody><tr><td colspan="7"><table class="CalTitle" cellspacing="0">
+		<tbody><tr><td class="CalNextPrev"><a href="javascript:void(0);" onclick="loadBlogCalendar(&#39;2018/02/01&#39;);return false;">&lt;</a></td><td align="center">2018年3月</td><td class="CalNextPrev" align="right"><a href="javascript:void(0);" onclick="loadBlogCalendar(&#39;2018/04/01&#39;);return false;">&gt;</a></td></tr>
+	</tbody></table></td></tr><tr><th class="CalDayHeader" align="center" abbr="日" scope="col">日</th><th class="CalDayHeader" align="center" abbr="一" scope="col">一</th><th class="CalDayHeader" align="center" abbr="二" scope="col">二</th><th class="CalDayHeader" align="center" abbr="三" scope="col">三</th><th class="CalDayHeader" align="center" abbr="四" scope="col">四</th><th class="CalDayHeader" align="center" abbr="五" scope="col">五</th><th class="CalDayHeader" align="center" abbr="六" scope="col">六</th></tr><tr><td class="CalOtherMonthDay" align="center">25</td><td class="CalOtherMonthDay" align="center">26</td><td class="CalOtherMonthDay" align="center">27</td><td class="CalOtherMonthDay" align="center">28</td><td align="center">1</td><td align="center">2</td><td class="CalWeekendDay" align="center">3</td></tr><tr><td class="CalWeekendDay" align="center">4</td><td align="center">5</td><td align="center">6</td><td align="center">7</td><td align="center">8</td><td align="center">9</td><td class="CalWeekendDay" align="center">10</td></tr><tr><td class="CalWeekendDay" align="center"><a href="http://www.cnblogs.com/popfisher/archive/2018/03/11.html"><u>11</u></a></td><td align="center">12</td><td align="center">13</td><td align="center">14</td><td align="center">15</td><td align="center">16</td><td class="CalWeekendDay" align="center">17</td></tr><tr><td class="CalWeekendDay" align="center">18</td><td align="center">19</td><td class="CalTodayDay" align="center">20</td><td align="center">21</td><td align="center">22</td><td align="center">23</td><td class="CalWeekendDay" align="center">24</td></tr><tr><td class="CalWeekendDay" align="center">25</td><td align="center">26</td><td align="center">27</td><td align="center">28</td><td align="center">29</td><td align="center">30</td><td class="CalWeekendDay" align="center">31</td></tr><tr><td class="CalOtherMonthDay" align="center">1</td><td class="CalOtherMonthDay" align="center">2</td><td class="CalOtherMonthDay" align="center">3</td><td class="CalOtherMonthDay" align="center">4</td><td class="CalOtherMonthDay" align="center">5</td><td class="CalOtherMonthDay" align="center">6</td><td class="CalOtherMonthDay" align="center">7</td></tr>
+</tbody></table></div><script type="text/javascript">loadBlogDefaultCalendar();</script>
+			
+			<div id="leftcontentcontainer">
+				<div id="blog-sidecolumn"><div id="sidebar_search" class="sidebar-block">
+<div id="sidebar_search" class="mySearch">
+<h3 class="catListTitle">搜索</h3>
+<div id="sidebar_search_box">
+<div id="widget_my_zzk" class="div_my_zzk"><input type="text" id="q" onkeydown="return zzk_go_enter(event);" class="input_my_zzk">&nbsp;<input onclick="zzk_go()" type="button" value="找找看" id="btnZzk" class="btn_my_zzk"></div>
+<div id="widget_my_google" class="div_my_zzk"><input type="text" name="google_q" id="google_q" onkeydown="return google_go_enter(event)" class="input_my_zzk">&nbsp;<input onclick="google_go()" type="button" value="谷歌搜索" class="btn_my_zzk"></div>
+</div>
+</div>
+
+</div><div id="sidebar_shortcut" class="sidebar-block">
+<div class="catListLink">
+<h3 class="catListTitle">常用链接</h3>
+<ul>
+<li><a href="http://www.cnblogs.com/popfisher/p/" title="我的博客的随笔列表">我的随笔</a></li><li><a href="http://www.cnblogs.com/popfisher/MyComments.html" title="我发表过的评论列表">我的评论</a></li><li><a href="http://www.cnblogs.com/popfisher/OtherPosts.html" title="我评论过的随笔列表">我的参与</a></li><li><a href="http://www.cnblogs.com/popfisher/RecentComments.html" title="我的博客的评论列表">最新评论</a></li><li><a href="http://www.cnblogs.com/popfisher/tag/" title="我的博客的标签列表">我的标签</a></li>
+</ul>
+<div id="itemListLin_con" style="display:none;">
+<ul>
+
+</ul>
+</div>
+</div></div><div id="sidebar_toptags" class="sidebar-block">
+<div class="catListTag">
+<h3 class="catListTitle">我的标签</h3>
+<ul>
+<li><a href="http://www.cnblogs.com/popfisher/tag/Android/">Android</a>(5)</li><li><a href="http://www.cnblogs.com/popfisher/tag/PopupWindow/">PopupWindow</a>(4)</li><li><a href="http://www.cnblogs.com/popfisher/tag/Git/">Git</a>(3)</li><li><a href="http://www.cnblogs.com/popfisher/tag/%E8%BE%85%E5%8A%A9%E5%8A%9F%E8%83%BD/">辅助功能</a>(2)</li><li><a href="http://www.cnblogs.com/popfisher/tag/%E5%86%85%E5%AD%98%E4%BC%98%E5%8C%96/">内存优化</a>(2)</li><li><a href="http://www.cnblogs.com/popfisher/tag/%E5%9B%BE%E7%89%87%E5%86%85%E5%AD%98/">图片内存</a>(2)</li><li><a href="http://www.cnblogs.com/popfisher/tag/Git%E9%85%8D%E7%BD%AE/">Git配置</a>(2)</li><li><a href="http://www.cnblogs.com/popfisher/tag/GradientDrawable/">GradientDrawable</a>(2)</li><li><a href="http://www.cnblogs.com/popfisher/tag/AccessibilityService/">AccessibilityService</a>(2)</li><li><a href="http://www.cnblogs.com/popfisher/tag/WindowManager/">WindowManager</a>(2)</li><li><a href="http://www.cnblogs.com/popfisher/tag/">更多</a></li>
+</ul>
+</div></div><div id="sidebar_categories">
+<div id="sidebar_postcategory" class="catListPostCategory sidebar-block">
+<h3 class="catListTitle">随笔分类</h3>
+
+<ul>
+
+<li><a id="CatList_LinkList_0_Link_0" href="http://www.cnblogs.com/popfisher/category/787535.html">Android(40)</a> </li>
+
+<li><a id="CatList_LinkList_0_Link_1" href="http://www.cnblogs.com/popfisher/category/991909.html">Android OOM分析(1)</a> </li>
+
+<li><a id="CatList_LinkList_0_Link_2" href="http://www.cnblogs.com/popfisher/category/844289.html">Android 源码解析(4)</a> </li>
+
+<li><a id="CatList_LinkList_0_Link_3" href="http://www.cnblogs.com/popfisher/category/877832.html">Android布局性能优化(2)</a> </li>
+
+<li><a id="CatList_LinkList_0_Link_4" href="http://www.cnblogs.com/popfisher/category/854356.html">Android动画(3)</a> </li>
+
+<li><a id="CatList_LinkList_0_Link_5" href="http://www.cnblogs.com/popfisher/category/787538.html">Android工具(2)</a> </li>
+
+<li><a id="CatList_LinkList_0_Link_6" href="http://www.cnblogs.com/popfisher/category/991908.html">Android内存优化(3)</a> </li>
+
+<li><a id="CatList_LinkList_0_Link_7" href="http://www.cnblogs.com/popfisher/category/877831.html">Android自定义控件(2)</a> </li>
+
+<li><a id="CatList_LinkList_0_Link_8" href="http://www.cnblogs.com/popfisher/category/912080.html">app启动性能优化(1)</a> </li>
+
+<li><a id="CatList_LinkList_0_Link_9" href="http://www.cnblogs.com/popfisher/category/825565.html">Git(3)</a> </li>
+
+<li><a id="CatList_LinkList_0_Link_10" href="http://www.cnblogs.com/popfisher/category/787536.html">Java(2)</a> </li>
+
+<li><a id="CatList_LinkList_0_Link_11" href="http://www.cnblogs.com/popfisher/category/787549.html">Python</a> </li>
+
+<li><a id="CatList_LinkList_0_Link_12" href="http://www.cnblogs.com/popfisher/category/1175996.html">插件化-Plugin</a> </li>
+
+<li><a id="CatList_LinkList_0_Link_13" href="http://www.cnblogs.com/popfisher/category/787537.html">耗电性能(1)</a> </li>
+
+<li><a id="CatList_LinkList_0_Link_14" href="http://www.cnblogs.com/popfisher/category/1151017.html">开源框架(2)</a> </li>
+
+<li><a id="CatList_LinkList_0_Link_15" href="http://www.cnblogs.com/popfisher/category/1175995.html">热修复-Hotfix(2)</a> </li>
+
+<li><a id="CatList_LinkList_0_Link_16" href="http://www.cnblogs.com/popfisher/category/904484.html">设计与重构(1)</a> </li>
+
+</ul>
+
+</div>
+
+<div id="sidebar_postarchive" class="catListPostArchive sidebar-block">
+<h3 class="catListTitle">随笔档案</h3>
+
+<ul>
+
+<li><a id="CatList_LinkList_1_Link_0" href="http://www.cnblogs.com/popfisher/archive/2018/03.html">2018年3月 (1)</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_1" href="http://www.cnblogs.com/popfisher/archive/2018/01.html">2018年1月 (1)</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_2" href="http://www.cnblogs.com/popfisher/archive/2017/12.html">2017年12月 (2)</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_3" href="http://www.cnblogs.com/popfisher/archive/2017/10.html">2017年10月 (1)</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_4" href="http://www.cnblogs.com/popfisher/archive/2017/08.html">2017年8月 (1)</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_5" href="http://www.cnblogs.com/popfisher/archive/2017/07.html">2017年7月 (2)</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_6" href="http://www.cnblogs.com/popfisher/archive/2017/06.html">2017年6月 (1)</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_7" href="http://www.cnblogs.com/popfisher/archive/2017/04.html">2017年4月 (1)</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_8" href="http://www.cnblogs.com/popfisher/archive/2017/02.html">2017年2月 (1)</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_9" href="http://www.cnblogs.com/popfisher/archive/2016/12.html">2016年12月 (1)</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_10" href="http://www.cnblogs.com/popfisher/archive/2016/11.html">2016年11月 (2)</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_11" href="http://www.cnblogs.com/popfisher/archive/2016/10.html">2016年10月 (2)</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_12" href="http://www.cnblogs.com/popfisher/archive/2016/09.html">2016年9月 (1)</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_13" href="http://www.cnblogs.com/popfisher/archive/2016/08.html">2016年8月 (1)</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_14" href="http://www.cnblogs.com/popfisher/archive/2016/07.html">2016年7月 (6)</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_15" href="http://www.cnblogs.com/popfisher/archive/2016/06.html">2016年6月 (3)</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_16" href="http://www.cnblogs.com/popfisher/archive/2016/05.html">2016年5月 (4)</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_17" href="http://www.cnblogs.com/popfisher/archive/2016/04.html">2016年4月 (2)</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_18" href="http://www.cnblogs.com/popfisher/archive/2016/03.html">2016年3月 (1)</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_19" href="http://www.cnblogs.com/popfisher/archive/2016/02.html">2016年2月 (9)</a> </li>
+
+</ul>
+
+</div>
+
+</div><div id="sidebar_recentcomments" class="sidebar-block"><div id="recent_comments_wrap">
+<div class="catListComment">
+<h3 class="catListTitle">最新评论</h3>
+
+	<div id="RecentCommentsBlock"><ul>
+        <li class="recent_comment_title"><a href="http://www.cnblogs.com/popfisher/p/8543973.html#3921357">1. Re:Android热修复技术原理详解（最新最全版本）</a></li>
+        <li class="recent_comment_body">谢谢分享</li>
+        <li class="recent_comment_author">--Rookie.</li>
+        <li class="recent_comment_title"><a href="http://www.cnblogs.com/popfisher/p/5731232.html#3914778">2. Re:Windows下Git多账号配置，同一电脑多个ssh-key的管理</a></li>
+        <li class="recent_comment_body">谢谢！</li>
+        <li class="recent_comment_author">--WinjayYu</li>
+        <li class="recent_comment_title"><a href="http://www.cnblogs.com/popfisher/p/5606690.html#3896485">3. Re:Android GradientDrawable(shape标签定义) 静态使用和动态使用(圆角，渐变实现)</a></li>
+        <li class="recent_comment_body">@听着music睡理论上说，Android的xml文件最终都是被代码解析出来使用的，所以xml写的东西一定对应有代码能够实现...</li>
+        <li class="recent_comment_author">--popfisher</li>
+        <li class="recent_comment_title"><a href="http://www.cnblogs.com/popfisher/p/5606690.html#3896470">4. Re:Android GradientDrawable(shape标签定义) 静态使用和动态使用(圆角，渐变实现)</a></li>
+        <li class="recent_comment_body">不错  一直以为只有静态实现</li>
+        <li class="recent_comment_author">--听着music睡</li>
+        <li class="recent_comment_title"><a href="http://www.cnblogs.com/popfisher/p/6063835.html#3888877">5. Re:Android指纹识别深入浅出分析到实战（6.0以下系统适配方案）</a></li>
+        <li class="recent_comment_body">@尘扬1可能跟系统指纹识别冲突了，看一下具体的日志，看看是回调什么方法回来...</li>
+        <li class="recent_comment_author">--popfisher</li>
+        <li class="recent_comment_title"><a href="http://www.cnblogs.com/popfisher/p/6063835.html#3873608">6. Re:Android指纹识别深入浅出分析到实战（6.0以下系统适配方案）</a></li>
+        <li class="recent_comment_body">大神,小米手机界面疯狂闪烁,无法进行指纹识别,很奇怪.</li>
+        <li class="recent_comment_author">--尘扬1</li>
+        <li class="recent_comment_title"><a href="http://www.cnblogs.com/popfisher/p/5608436.html#3857547">7. Re:Android PopupWindow怎么合理控制弹出位置（showAtLocation）</a></li>
+        <li class="recent_comment_body">@破晓的星客气了，共同学习...</li>
+        <li class="recent_comment_author">--popfisher</li>
+        <li class="recent_comment_title"><a href="http://www.cnblogs.com/popfisher/p/5608436.html#3857513">8. Re:Android PopupWindow怎么合理控制弹出位置（showAtLocation）</a></li>
+        <li class="recent_comment_body">谢谢楼主  学习中。</li>
+        <li class="recent_comment_author">--破晓的星</li>
+        <li class="recent_comment_title"><a href="http://www.cnblogs.com/popfisher/p/5608436.html#3792648">9. Re:Android PopupWindow怎么合理控制弹出位置（showAtLocation）</a></li>
+        <li class="recent_comment_body">@Shaa3747你也要多写点出来分享一下，哈哈...</li>
+        <li class="recent_comment_author">--popfisher</li>
+        <li class="recent_comment_title"><a href="http://www.cnblogs.com/popfisher/p/5608436.html#3791788">10. Re:Android PopupWindow怎么合理控制弹出位置（showAtLocation）</a></li>
+        <li class="recent_comment_body">大胜哥6666</li>
+        <li class="recent_comment_author">--Shaa3747</li>
+</ul>
+</div>
+</div>
+</div></div><div id="sidebar_topviewedposts" class="sidebar-block"><div id="topview_posts_wrap">
+<div class="catListView">
+<h3 class="catListTitle">阅读排行榜</h3>
+	<div id="TopViewPostsBlock"><ul><li><a href="http://www.cnblogs.com/popfisher/p/5191242.html">1. Android TextView 添加下划线的几种方式(59951)</a></li><li><a href="http://www.cnblogs.com/popfisher/p/5608436.html">2. Android PopupWindow怎么合理控制弹出位置（showAtLocation）(50070)</a></li><li><a href="http://www.cnblogs.com/popfisher/p/5466174.html">3. Git-TortoiseGit完整配置流程(28046)</a></li><li><a href="http://www.cnblogs.com/popfisher/p/5709202.html">4. Android ScrollView监听滑动到顶部和底部的两种方式（你可能不知道的细节）(26331)</a></li><li><a href="http://www.cnblogs.com/popfisher/p/6063835.html">5. Android指纹识别深入浅出分析到实战（6.0以下系统适配方案）(13193)</a></li><li><a href="http://www.cnblogs.com/popfisher/p/7992036.html">6. 快速搭建一个本地的FTP服务器(12037)</a></li><li><a href="http://www.cnblogs.com/popfisher/p/5731232.html">7. Windows下Git多账号配置，同一电脑多个ssh-key的管理(11579)</a></li><li><a href="http://www.cnblogs.com/popfisher/p/5944054.html">8. 不得不吐槽的Android PopupWindow的几个痛点（实现带箭头的上下文菜单遇到的坑）(8703)</a></li><li><a href="http://www.cnblogs.com/popfisher/p/5606690.html">9. Android GradientDrawable(shape标签定义) 静态使用和动态使用(圆角，渐变实现)(5465)</a></li><li><a href="http://www.cnblogs.com/popfisher/p/5650969.html">10. Android来电监听和去电监听(5180)</a></li></ul></div>
+</div>
+</div></div><div id="sidebar_topcommentedposts" class="sidebar-block"><div id="topfeedback_posts_wrap">
+<div class="catListFeedback">
+<h3 class="catListTitle">评论排行榜</h3>
+	<div id="TopFeedbackPostsBlock"><ul><li><a href="http://www.cnblogs.com/popfisher/p/5608436.html">1. Android PopupWindow怎么合理控制弹出位置（showAtLocation）(28)</a></li><li><a href="http://www.cnblogs.com/popfisher/p/5709202.html">2. Android ScrollView监听滑动到顶部和底部的两种方式（你可能不知道的细节）(8)</a></li><li><a href="http://www.cnblogs.com/popfisher/p/6028613.html">3. Android重构与设计之路，从整理提示弹窗（SmartAlertPop）开始(7)</a></li><li><a href="http://www.cnblogs.com/popfisher/p/5731232.html">4. Windows下Git多账号配置，同一电脑多个ssh-key的管理(5)</a></li><li><a href="http://www.cnblogs.com/popfisher/p/7249562.html">5. Android高效内存之让你的图片省内存(5)</a></li><li><a href="http://www.cnblogs.com/popfisher/p/6063835.html">6. Android指纹识别深入浅出分析到实战（6.0以下系统适配方案）(4)</a></li><li><a href="http://www.cnblogs.com/popfisher/p/5466174.html">7. Git-TortoiseGit完整配置流程(4)</a></li><li><a href="http://www.cnblogs.com/popfisher/p/6959106.html">8. Android高效内存1：一张图片占用多少内存(2)</a></li><li><a href="http://www.cnblogs.com/popfisher/p/5608717.html">9. PopupWindow 点击外部和返回键无法消失背后的真相（setBackgroundDrawable(Drawable background)）(2)</a></li><li><a href="http://www.cnblogs.com/popfisher/p/5606690.html">10. Android GradientDrawable(shape标签定义) 静态使用和动态使用(圆角，渐变实现)(2)</a></li></ul></div>
+</div>
+</div></div><div id="sidebar_topdiggedposts" class="sidebar-block"><div id="topdigg_posts_wrap">
+<div class="catListView">
+<h3 class="catListTitle">推荐排行榜</h3>
+<div id="TopDiggPostsBlock"><ul><li><a href="http://www.cnblogs.com/popfisher/p/5731232.html">1. Windows下Git多账号配置，同一电脑多个ssh-key的管理(14)</a></li><li><a href="http://www.cnblogs.com/popfisher/p/5709202.html">2. Android ScrollView监听滑动到顶部和底部的两种方式（你可能不知道的细节）(9)</a></li><li><a href="http://www.cnblogs.com/popfisher/p/5466174.html">3. Git-TortoiseGit完整配置流程(5)</a></li><li><a href="http://www.cnblogs.com/popfisher/p/5634024.html">4. HandlerThread 创建一个异步的后台线程(4)</a></li><li><a href="http://www.cnblogs.com/popfisher/p/5608436.html">5. Android PopupWindow怎么合理控制弹出位置（showAtLocation）(4)</a></li><li><a href="http://www.cnblogs.com/popfisher/p/5650969.html">6. Android来电监听和去电监听(3)</a></li><li><a href="http://www.cnblogs.com/popfisher/p/6238119.html">7. Android XML shape 标签使用详解（apk瘦身，减少内存好帮手）(3)</a></li><li><a href="http://www.cnblogs.com/popfisher/p/6028613.html">8. Android重构与设计之路，从整理提示弹窗（SmartAlertPop）开始(3)</a></li><li><a href="http://www.cnblogs.com/popfisher/p/5191242.html">9. Android TextView 添加下划线的几种方式(3)</a></li><li><a href="http://www.cnblogs.com/popfisher/p/8543973.html">10. Android热修复技术原理详解（最新最全版本）(2)</a></li></ul></div>
+</div></div></div></div><script type="text/javascript">loadBlogSideColumn();</script>
+			</div>
+			
+		</div><!--end: sideBarMain -->
+	</div><!--end: sideBar 侧边栏容器 -->
+	<div class="clear"></div>
+	</div><!--end: main -->
+	<div class="clear"></div>
+	<div id="footer">
+		
+<!--done-->
+Copyright ©2018 popfisher
+	</div><!--end: footer -->
+</div><!--end: home 自定义的最大容器 -->
+
+
+</body></html>
